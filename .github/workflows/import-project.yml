@@ -1,0 +1,36 @@
+name: Import VU Courses Project
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  import-project:
+    if: ${{ !contains(github.event.head_commit.message, '[sync-project]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Import project from source repository
+        run: |
+          set -e
+          rm -rf source-project
+          git clone --depth 1 "https://github.com/m99000321-eng/vu-courses..git" source-project
+          rm -rf source-project/.git
+          find . -mindepth 1 -maxdepth 1 ! -name source-project ! -name .git ! -name .github -exec rm -rf {} +
+          cp -a source-project/. .
+          rm -rf source-project
+
+      - name: Commit imported project
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "sync-project: import final VU Courses version" || exit 0
+          git push origin main
