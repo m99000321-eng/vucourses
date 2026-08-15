@@ -9,6 +9,7 @@ import {
   QrCode,
   Calendar,
   BookOpen,
+  X as XIcon,
 } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 
@@ -102,7 +103,7 @@ export default function AdminCertificates() {
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
-                 placeholder={t('searchCertificatesPlaceholder')}
+                placeholder={t('searchCertificatesPlaceholder')}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pr-10 pl-4 py-2 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-medium text-slate-800 dark:text-slate-200 outline-none focus:ring-2 focus:ring-brand-purple/50"
@@ -117,13 +118,13 @@ export default function AdminCertificates() {
               <div className="overflow-x-auto">
                 <table className="w-full text-right text-xs">
                   <thead>
-                     <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold">
-                       <th className="py-3 px-4">{t('student')}</th>
-                       <th className="py-3 px-4">{t('course')}</th>
-                       <th className="py-3 px-4">{t('certificateCode')}</th>
-                       <th className="py-3 px-4">{t('issuedAt')}</th>
-                       <th className="py-3 px-4">{t('actions')}</th>
-                     </tr>
+                    <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 font-bold">
+                      <th className="py-3 px-4">{t('student')}</th>
+                      <th className="py-3 px-4">{t('course')}</th>
+                      <th className="py-3 px-4">{t('certificateCode')}</th>
+                      <th className="py-3 px-4">{t('issuedAt')}</th>
+                      <th className="py-3 px-4">{t('actions')}</th>
+                    </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
                     {filteredCerts.map((c) => (
@@ -154,14 +155,14 @@ export default function AdminCertificates() {
                             <button
                               onClick={() => setShowQR(showQR === c.id ? null : c.id)}
                               className="p-1.5 hover:bg-blue-50 dark:hover:bg-slate-800 text-blue-600 rounded-lg transition"
-                               title={t('viewQR')}
+                              title={t('viewQR')}
                             >
                               <QrCode className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => handleRevoke(c.id)}
                               className="p-1.5 hover:bg-rose-50 dark:hover:bg-slate-800 text-rose-600 rounded-lg transition"
-                               title={t('revokeCertificate')}
+                              title={t('revokeCertificate')}
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -195,7 +196,7 @@ export default function AdminCertificates() {
                     </div>
                   </div>
                 </div>
-                 <p className="text-xs text-slate-500 mt-3 text-center">{t('scanQRToVerify')}</p>
+                <p className="text-xs text-slate-500 mt-3 text-center">{t('scanQRToVerify')}</p>
               </div>
             </div>
           )}
